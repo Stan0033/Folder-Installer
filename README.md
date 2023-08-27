@@ -10,7 +10,8 @@ How to use:
 ![Solve](https://i.ibb.co/smTmyDV/autorun.png)
 
 3. The content folder must have exactly this name and must not be empty
-4. The music file must be in WAV format. It is optional to have it
-5. the headjer.jpg must be with extension JPG and must be present
-6. if everything is correct, the app will be able to copy the contents of the content folder, to create a desktop shortcut, to create uninstall.bat in the target folder, to add an entry to the Add/Remove programs menu of Windows.
-7. You can also package that in an ISO file, for practicality. You can use tools like PowerISO, MagicISO or otehrs. ISO files are natively supported in windows 10 and 11.
+4. rename installer.exe to setup.exe
+5. The music file must be in WAV format. It is optional to have it
+6. the headjer.jpg must be with extension JPG and must be present
+7. if everything is correct, the app will be able to copy the contents of the content folder, to create a desktop shortcut, to create uninstall.bat in the target folder, to add an entry to the Add/Remove programs menu of Windows.
+8. You can also package that in an ISO file, for practicality. You can use tools like PowerISO, MagicISO or otehrs. ISO files are natively supported in windows 10 and 11.
