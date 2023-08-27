@@ -16,7 +16,7 @@ How to use:
 7. if everything is correct, the app will be able to copy the contents of the content folder, to create a desktop shortcut, to create uninstall.bat in the target folder, to add an entry to the Add/Remove programs menu of Windows.
 8. You can also package that in an ISO file, for practicality. You can use tools like PowerISO, MagicISO or otehrs. ISO files are natively supported in windows 10 and 11.
 
-![Solve]((https://gcdnb.pbrd.co/images/vqA2u6CDQ6qw.png?o=1)
+![Solve](https://gcdnb.pbrd.co/images/vqA2u6CDQ6qw.png?o=1)
 
 RESPECT THE DEVELOPER, DO NOT MODIFY, UPLOAD OR DISTRIBUTE AS YOUR OWN. 
 
