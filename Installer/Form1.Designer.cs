@@ -41,6 +41,7 @@
             this.check_Uninstall = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button_uninstall = new System.Windows.Forms.Button();
+            this.button_viewImages = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.previewer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,11 +163,23 @@
             this.button_uninstall.UseVisualStyleBackColor = true;
             this.button_uninstall.Click += new System.EventHandler(this.button_uninstall_Click);
             // 
+            // button_viewImages
+            // 
+            this.button_viewImages.Location = new System.Drawing.Point(444, 198);
+            this.button_viewImages.Name = "button_viewImages";
+            this.button_viewImages.Size = new System.Drawing.Size(23, 23);
+            this.button_viewImages.TabIndex = 12;
+            this.button_viewImages.Text = "🔍";
+            this.button_viewImages.UseVisualStyleBackColor = true;
+            this.button_viewImages.Visible = false;
+            this.button_viewImages.Click += new System.EventHandler(this.button_viewImages_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 390);
+            this.Controls.Add(this.button_viewImages);
             this.Controls.Add(this.button_uninstall);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.check_Uninstall);
@@ -204,6 +217,7 @@
         private System.Windows.Forms.CheckBox check_Uninstall;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button_uninstall;
+        private System.Windows.Forms.Button button_viewImages;
     }
 }
 

@@ -32,6 +32,7 @@ namespace Installer
         bool Installed = false;
         string SoundFileName = string.Empty;
         bool hasSound = false;
+        List<string> imageFiles;
         SoundPlayer backgroundMusicPlayer;
         List<string> listfiles;
         public Form1()
@@ -43,6 +44,13 @@ namespace Installer
             Path_ExtractedFolder = Path.Combine(Environment.CurrentDirectory, "content");
             shortcut = string.Empty;
             listfiles = new List<string>();
+            imageFiles = new List<string>();
+
+            imageFiles = GetJpgFilesInFolder(Path.Combine(Environment.CurrentDirectory, "pics")); ;
+            if (imageFiles.Count > 0)
+            {
+                button_viewImages.Visible=true;
+            }
 
         }
 
@@ -698,6 +706,34 @@ endlocal
                     return false;
                 }
             }
+        }
+
+        static List<string> GetJpgFilesInFolder(string folderPath)
+        {
+            List<string> jpgFiles = new List<string>();
+
+            if (Directory.Exists(folderPath))
+            {
+                string[] files = Directory.GetFiles(folderPath, "*.jpg");
+
+                foreach (string file in files)
+                {
+                    jpgFiles.Add(file);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Folder does not exist.");
+            }
+
+            return jpgFiles;
+        }
+
+        private void button_viewImages_Click(object sender, EventArgs e)
+        {
+             var v = new Form2(imageFiles);
+            v.ShowDialog();
+           
         }
     }
 }
