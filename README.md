@@ -17,3 +17,5 @@ How to use:
 8. You can also package that in an ISO file, for practicality. You can use tools like PowerISO, MagicISO or otehrs. ISO files are natively supported in windows 10 and 11.
 
 RESPECT THE DEVELOPER, DO NOT MODIFY, UPLOAD OR DISTRIBUTE AS YOUR OWN. 
+
+![Solve](https://i.ibb.co/42dD5LC/Untitled.png)
