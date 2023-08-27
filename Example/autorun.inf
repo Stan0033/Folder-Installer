@@ -1,0 +1,5 @@
+[autorun]
+open=setup.exe
+icon=setup.exe
+label=Example App
+;header.jpg

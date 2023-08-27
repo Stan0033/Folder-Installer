@@ -1,0 +1,51 @@
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.AssemblyReference.cache
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Interop.Shell32.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.ResolveComReference.cache
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.Form1.resources
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.Properties.Resources.resources
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.GenerateResource.cache
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.CoreCompileInputs.cache
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\Installer.exe.config
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\Installer.exe
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\Installer.pdb
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Buffers.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Memory.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Buffers.xml
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Memory.xml
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.CopyComplete
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.exe
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.pdb
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\SharpCompress.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\Stan\Documents\visual studio 2013\Projects\Installer\Installer\obj\Debug\Installer.csproj.SuggestedBindingRedirects.cache
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\Installer.exe.config
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\Installer.exe
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\Installer.pdb
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Buffers.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Memory.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Security.AccessControl.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Numerics.Vectors.dll
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Buffers.xml
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Memory.xml
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Projects\Software\__RAW\Installer\Installer\bin\Debug\System.Security.AccessControl.xml
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.csproj.AssemblyReference.cache
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Interop.Shell32.dll
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.csproj.ResolveComReference.cache
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.Form1.resources
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.Properties.Resources.resources
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.csproj.GenerateResource.cache
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.csproj.CoreCompileInputs.cache
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.csproj.CopyComplete
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.exe
+C:\Projects\Software\__RAW\Installer\Installer\obj\Debug\Installer.pdb
