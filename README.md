@@ -2,13 +2,10 @@
 Helps you install and uninstall software program or game from a folder
 
 How to use:
-
 1. In the installation folder you must have these:
-
-   ![Solve](https://i.ibb.co/RD2Rdm1/contents.png)
-
-   2. The autorun.inf's content must be like this:
-       ![Solve](https://i.ibb.co/smTmyDV/autorun.png)
+![Solve](https://i.ibb.co/RD2Rdm1/contents.png)
+2. The autorun.inf's content must be like this:
+![Solve](https://i.ibb.co/smTmyDV/autorun.png)
 
       3. The content folder must have exactly this name and must not be empty
       4. The music file must be in WAV format. It is optional to have it
