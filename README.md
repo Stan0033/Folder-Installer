@@ -5,6 +5,8 @@ How to use:
 1. In the installation folder you must have these:
 ![Solve](https://i.ibb.co/RD2Rdm1/contents.png)
 2. The autorun.inf's content must be like this:
+
+
 ![Solve](https://i.ibb.co/smTmyDV/autorun.png)
 
 3. The content folder must have exactly this name and must not be empty
