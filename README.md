@@ -18,4 +18,4 @@ How to use:
 
 RESPECT THE DEVELOPER, DO NOT MODIFY, UPLOAD OR DISTRIBUTE AS YOUR OWN. 
 
-![Solve]([https://i.ibb.co/42dD5LC/Untitled.png](https://i.ibb.co/42dD5LC/Untitled.png)https://i.ibb.co/42dD5LC/Untitled.png)
+![Solve](https://i.ibb.co/42dD5LC/Untitled.png)
