@@ -3,7 +3,7 @@ Helps you install and uninstall software program or game from a folder. No compr
 
 How to use:
 1. In the installation folder you must have these:
-![Solve](https://i.ibb.co/nPFfwXd/ga.png)
+![Solve](https://i.ibb.co/cyfbsDt/files.png)
 2. The autorun.inf's content must be like this:
 
 
