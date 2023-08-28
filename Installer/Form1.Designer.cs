@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.previewer = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_browse = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button_install = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -39,7 +39,7 @@
             this.check_openFolder = new System.Windows.Forms.CheckBox();
             this.check_Shortcut = new System.Windows.Forms.CheckBox();
             this.check_Uninstall = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_stopMusic = new System.Windows.Forms.Button();
             this.button_uninstall = new System.Windows.Forms.Button();
             this.button_viewImages = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.previewer)).BeginInit();
@@ -54,16 +54,17 @@
             this.previewer.TabIndex = 0;
             this.previewer.TabStop = false;
             // 
-            // button1
+            // button_browse
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(432, 233);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_browse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_browse.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_browse.Location = new System.Drawing.Point(432, 233);
+            this.button_browse.Name = "button_browse";
+            this.button_browse.Size = new System.Drawing.Size(40, 29);
+            this.button_browse.TabIndex = 2;
+            this.button_browse.Text = "...";
+            this.button_browse.UseVisualStyleBackColor = true;
+            this.button_browse.Click += new System.EventHandler(this.BrowseFolder_Click);
             // 
             // button_install
             // 
@@ -86,6 +87,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
@@ -138,18 +140,18 @@
             this.check_Uninstall.Text = "Add to installed apps";
             this.check_Uninstall.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button_stopMusic
             // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(447, 296);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(25, 21);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "||";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_stopMusic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_stopMusic.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_stopMusic.Location = new System.Drawing.Point(447, 296);
+            this.button_stopMusic.Name = "button_stopMusic";
+            this.button_stopMusic.Size = new System.Drawing.Size(25, 21);
+            this.button_stopMusic.TabIndex = 10;
+            this.button_stopMusic.Text = "||";
+            this.button_stopMusic.UseVisualStyleBackColor = true;
+            this.button_stopMusic.Visible = false;
+            this.button_stopMusic.Click += new System.EventHandler(this.button2_Click);
             // 
             // button_uninstall
             // 
@@ -165,6 +167,7 @@
             // 
             // button_viewImages
             // 
+            this.button_viewImages.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_viewImages.Location = new System.Drawing.Point(444, 198);
             this.button_viewImages.Name = "button_viewImages";
             this.button_viewImages.Size = new System.Drawing.Size(23, 23);
@@ -181,7 +184,7 @@
             this.ClientSize = new System.Drawing.Size(483, 390);
             this.Controls.Add(this.button_viewImages);
             this.Controls.Add(this.button_uninstall);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_stopMusic);
             this.Controls.Add(this.check_Uninstall);
             this.Controls.Add(this.check_Shortcut);
             this.Controls.Add(this.check_openFolder);
@@ -189,7 +192,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button_install);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_browse);
             this.Controls.Add(this.previewer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -206,7 +209,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox previewer;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_browse;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button_install;
         private System.Windows.Forms.ProgressBar progressBar1;
@@ -215,7 +218,7 @@
         private System.Windows.Forms.CheckBox check_openFolder;
         private System.Windows.Forms.CheckBox check_Shortcut;
         private System.Windows.Forms.CheckBox check_Uninstall;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_stopMusic;
         private System.Windows.Forms.Button button_uninstall;
         private System.Windows.Forms.Button button_viewImages;
     }

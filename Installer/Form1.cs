@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
- 
+
 using System.Drawing;
- 
+
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
- 
+
 using Microsoft.Win32;
 using System.Diagnostics;
- 
+
 using IWshRuntimeLibrary;
 using File = System.IO.File;
- 
+
 using System.Linq;
 using System.Media;
- 
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Installer
 {
@@ -28,7 +29,11 @@ namespace Installer
         string Selected_Path; // selected + nameof Installation_Name
         string autorun;
         string shortcut;
+
+        string IConPathSource;
+        string IConPathInstalled;
         string Path_ExtractedFolder = string.Empty;
+        public CancellationTokenSource cancellationTokenSource;
         bool Installed = false;
         string SoundFileName = string.Empty;
         bool hasSound = false;
@@ -49,13 +54,20 @@ namespace Installer
             imageFiles = GetJpgFilesInFolder(Path.Combine(Environment.CurrentDirectory, "pics")); ;
             if (imageFiles.Count > 0)
             {
-                button_viewImages.Visible=true;
+                button_viewImages.Visible = true;
             }
 
-        }
 
+        }
+        public bool IsThereIcon()
+        {
+            return File.Exists(Path.Combine(Environment.CurrentDirectory, "icon.ico"));
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            IConPathSource = Path.Combine(Environment.CurrentDirectory, "icon.ico");
+
             Installation_Name = ExtractApplicationNameFromAutorun();
             Text = Installation_Name == "Installer" ? Installation_Name : "Install " + Installation_Name;
 
@@ -81,7 +93,7 @@ namespace Installer
             comboBox2.Text = "Games";
             FillDiskLettersComboBox();
 
-           
+
 
             Installed = RegistryKeyExists(Installation_Name);
             if (Installed)
@@ -99,11 +111,11 @@ namespace Installer
             }
             SoundFileName = "music.wav";
             hasSound = IsValidSoundFile(Environment.CurrentDirectory, SoundFileName);
-             if (hasSound)
+            if (hasSound)
             {
-                button2.Visible = true;
-               string musicFileFullPath = Path.Combine(Environment.CurrentDirectory, SoundFileName);
-                
+                button_stopMusic.Visible = true;
+                string musicFileFullPath = Path.Combine(Environment.CurrentDirectory, SoundFileName);
+
                 PlayBackgroundMusic(musicFileFullPath);
             }
         }
@@ -155,7 +167,7 @@ namespace Installer
 
             return "Installer";
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void BrowseFolder_Click(object sender, EventArgs e)
         {
             using (var folderBrowserDialog = new FolderBrowserDialog())
             {
@@ -229,12 +241,11 @@ namespace Installer
         private void Install_Click(object sender, EventArgs e)
         {
 
-             
-
-
-
-
-
+             Selected_Path = Path.Combine(Path.Combine(comboBox1.Text, comboBox2.Text), Installation_Name);
+            if (button_install.Text == "Install")
+            {
+                cancellationTokenSource = new CancellationTokenSource();
+                CancellationToken cancellationToken = cancellationTokenSource.Token;
                 if (CheckFolder(Path.Combine(comboBox1.Text, comboBox2.Text.Trim())))
                 {
                     CreateFolder(Installation_Name, Path.Combine(comboBox1.Text, comboBox2.Text.Trim()));
@@ -245,10 +256,13 @@ namespace Installer
 
                     if (CheckForEnoughSpace(target, install_contents_folderName))
                     {
-                        button_install.Enabled = false;
+
+                        button_install.Text = "Stop";
                         //ExtractTarContents (target, install_contents);
                         listfiles = ListFiles(Path_ExtractedFolder, 20);
-                        CopyFilesAsync(listfiles, target);
+                        CopyICon();
+                        CopyFilesAsync(listfiles, target, cancellationToken);
+
 
                     }
                     else
@@ -257,7 +271,19 @@ namespace Installer
                     }
 
                 }
-           
+            }
+
+            else if (button_install.Text == "Stop")
+
+            {
+
+                button_install.Enabled = false;
+                CancelInstall();
+                Directory.Delete(Selected_Path);
+            }
+
+
+
         }
         private void CreateFolder(string folderName, string folderPath)
         {
@@ -295,25 +321,42 @@ namespace Installer
 
 
 
-       
+
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
             comboBox2.Text = string.Empty;
         }
+        static string ConvertToValidFilename(string input)
+        {
+            // Define a regular expression pattern to match invalid characters
+            string invalidCharsPattern = "[\\/:*?\"<>|]";
+
+            // Replace colons with " - "
+            string cleanedInput = input.Replace(":", " - ");
+
+            // Replace other invalid characters with whitespaces
+            cleanedInput = Regex.Replace(cleanedInput, invalidCharsPattern, " ");
+
+            return cleanedInput;
+        }
+
+
+
+
+
         static string ExtractAutorunComment(string filePath)
         {
             try
             {
                 string[] lines = File.ReadAllLines(filePath);
-
                 foreach (string line in lines)
                 {
                     string trimmedLine = line.Trim();
                     if (trimmedLine.StartsWith(";"))
                     {
                         // Remove the leading semicolon and any leading/trailing whitespace
-                        return trimmedLine.Substring(1).Trim();
+                        return ConvertToValidFilename(trimmedLine.Substring(1).Trim());
                     }
                 }
             }
@@ -391,8 +434,8 @@ namespace Installer
 
             foreach (string filePath in Directory.GetFiles(folderPath))
             {
-               string relativePath = filePath.Substring(rootPath.Length).TrimStart('\\');
-               string fullPath = Path.Combine(rootPath, relativePath); // Create full path
+                string relativePath = filePath.Substring(rootPath.Length).TrimStart('\\');
+                string fullPath = Path.Combine(rootPath, relativePath); // Create full path
                 results.Add(fullPath); // Include full path
             }
 
@@ -402,18 +445,42 @@ namespace Installer
             }
         }
 
+        private void CancelInstall()
+        {
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+            }
+        }
+        public void CopyICon()
+        {
+            if (IsThereIcon())
+            {
+              IConPathSource = Path.Combine(Environment.CurrentDirectory, "icon.ico");
+              IConPathInstalled = Path.Combine(Selected_Path, "icon.ico");
+                if (!File.Exists(IConPathInstalled)){
+                    File.Copy(IConPathSource, Path.Combine(Selected_Path, "icon.ico"));
 
-        public async Task CopyFilesAsync(List<string> files, string targetFolder)
+                }
+                
+
+            }
+        }
+        public async Task CopyFilesAsync(List<string> files, string targetFolder, CancellationToken cancellationToken)
         {
             int totalFiles = files.Count;
             progressBar1.Maximum = totalFiles; // Set the maximum value of ProgressBar1
             int copiedFiles = 0;
             bool filesMissing = false;
-
-            foreach (string filePath in files)
+          
+                foreach (string filePath in files)
             {
-              //  MessageBox.Show($"Copying: {filePath}");
-
+                //  MessageBox.Show($"Copying: {filePath}");
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    MessageBox.Show("File copy operation was cancelled.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 if (!File.Exists(filePath))
                 {
                     MessageBox.Show($"Source file missing: {filePath}");
@@ -424,8 +491,8 @@ namespace Installer
                 string relativePath = Path.GetFullPath(filePath).Substring(Path.GetFullPath("content").Length + 1);
                 string targetPath = Path.Combine(targetFolder, relativePath);
 
-             //   MessageBox.Show($"Relative path: {relativePath}");
-             //   MessageBox.Show($"Target path: {targetPath}");
+                //   MessageBox.Show($"Relative path: {relativePath}");
+                //   MessageBox.Show($"Target path: {targetPath}");
 
                 try
                 {
@@ -454,8 +521,10 @@ namespace Installer
             else
             {
                 MessageBox.Show("Installation completed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                if(check_Uninstall.Checked)
+                StopBackgroundMusic();
+                button_stopMusic.Visible = false;
+                button_install.Enabled = false;
+                if (check_Uninstall.Checked)
                 {
                     string target = Path.Combine(Path.Combine(comboBox1.Text, comboBox2.Text), Installation_Name);
 
@@ -468,11 +537,11 @@ namespace Installer
                 if (check_openFolder.Checked)
                 {
                     string target = Path.Combine(Path.Combine(comboBox1.Text, comboBox2.Text), Installation_Name);
-                    Process.Start("explorer.exe",target);
+                    Process.Start("explorer.exe", target);
                 }
                 if (check_Shortcut.Checked)
                 {
-                    string shortcut_path = Path.Combine(Environment.CurrentDirectory,shortcut);
+                    string shortcut_path = Path.Combine(Selected_Path, shortcut);
                     CreateShortcut(shortcut_path);
                 }
 
@@ -532,31 +601,38 @@ endlocal
 
 
         public void AddProgramToUninstall(string displayName, string uninstallString)
-    {
-        try
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", true))
+            try
             {
-                if (key != null)
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall", true))
                 {
-                    using (RegistryKey subKey = key.CreateSubKey(displayName))
+                    if (key != null)
                     {
-                        if (subKey != null)
+                        using (RegistryKey subKey = key.CreateSubKey(displayName))
                         {
-                            subKey.SetValue("DisplayName", displayName);
-                            subKey.SetValue("UninstallString","\""+ uninstallString + "\"  /UNINSTALL");
-                            subKey.SetValue("NoModify", 1);
-                            subKey.SetValue("NoRepair", 1);
+                            if (subKey != null)
+                            {
+                                subKey.SetValue("DisplayName", displayName);
+                                subKey.SetValue("UninstallString", "\"" + uninstallString + "\"  /UNINSTALL");
+                                subKey.SetValue("NoModify", 1);
+                                subKey.SetValue("NoRepair", 1);
+                                if (IsThereIcon())
+                                {
+                                     
+                                    subKey.SetValue("DisplayIcon", IConPathInstalled);
+                                }
+
+
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not create uninstall in registry");
+            }
         }
-        catch (Exception ex)
-        {
-              MessageBox.Show("Could not create uninstall in registry");
-        }
-    }
         static bool RegistryKeyExists(string keyName)
         {
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"))
@@ -595,9 +671,9 @@ endlocal
                 return false;
             }
         }
-        void PlayBackgroundMusic( string musicFileName)
+        void PlayBackgroundMusic(string musicFileName)
         {
-            
+
             if (File.Exists(musicFileName))
             {
                 try
@@ -623,20 +699,20 @@ endlocal
                 backgroundMusicPlayer.Stop();
                 backgroundMusicPlayer.Dispose();
             }
-            button2.Visible = false;
+            button_stopMusic.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             StopBackgroundMusic();
-             
+
         }
 
         private void button_uninstall_Click(object sender, EventArgs e)
         {
             // find the registry key and run uninstall.bat 
-          bool success =   ExecuteUninstallEntry(Installation_Name);
-            if (success) { MessageBox.Show("Uninstalled successfully."); button_uninstall.Enabled = false; }
+            bool success = ExecuteUninstallEntry(Installation_Name);
+            if (success) { MessageBox.Show("Uninstalled successfully."); button_uninstall.Enabled = false; StopBackgroundMusic(); button_stopMusic.Visible = false; }
 
         }
 
@@ -731,17 +807,17 @@ endlocal
 
         private void button_viewImages_Click(object sender, EventArgs e)
         {
-             var v = new Form2(imageFiles);
+            var v = new Form2(imageFiles);
             v.ShowDialog();
-           
+
         }
     }
 }
- 
 
- 
- 
- 
+
+
+
+
 
 
 

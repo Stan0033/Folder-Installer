@@ -1,0 +1,11 @@
+1.2:
+- added support for music as (.wav only)
+- added previewer for images in the folder pics
+1.2a:
+- the created shortcut will now have a correct path
+- you can now cancel installation if it's running
+- install/uninstall entry now can have icon
+- it's optional that you include an icon.ico file with that, in the folder of the installation
+- music will now stop when installation is completed
+- now if the name of the installed app inside autorun.inf has invalid characters, it will be corrected before proceeding to installing
+- added hand cursor for some controls that lacked it
